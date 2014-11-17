@@ -40,7 +40,7 @@ class Press(webapp2.RequestHandler):
 
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Logout ' +   greeting.author.nickname()
+            url_linktext = 'Logout ' +   users.get_current_user().nickname()
         else:
             url = users.create_login_url(self.request.uri)
             url_linktext = 'Login'
@@ -48,9 +48,9 @@ class Press(webapp2.RequestHandler):
         # Write the submission form and the footer of the page
         sign_query_params = urllib.urlencode({'catalogue_name': catalogue_name})
 
-        self.response.write(self.PRESS_PAGE_FOOTER_TEMPLATE %
-                            (sign_query_params,
-                             url, url_linktext))
+        self.response.write(self.PRESS_PAGE_FOOTER_TEMPLATE % (sign_query_params, url, url_linktext))
+
+
 
     def post(self) :
         catalogue_name = self.request.get('catalogue_name',

@@ -4,6 +4,7 @@ import cgi
 from entry import Entry
 import datastore
 
+from lxml import etree
 
 class Root(webapp2.RequestHandler):
 
@@ -21,13 +22,31 @@ class Root(webapp2.RequestHandler):
     '''
 
     def get(self):
-       catalogue_name = self.request.get('catalogue_name',
-                                          datastore.DEFAULT_CATALOGUE_NAME)
-       catalogue_query = Entry.query(
+        # get all the entries
+        catalogue_name = self.request.get('catalogue_name',
+            datastore.DEFAULT_CATALOGUE_NAME)
+        catalogue_query = Entry.query(
             ancestor=datastore.create_entry_key(catalogue_name)).order(-Entry.date)
+        entries = catalogue_query.fetch()
 
-       entries = catalogue_query.fetch()
-       self.response.write('<h1>Root</h1>')
-       for entry in entries:
-            self.response.write('<hr/><blockquote>%s</blockquote>' %
-                cgi.escape(entry.content))
+        # wrap feed around the entries
+        xml = '''\
+        <feed xmlns="http://www.w3.org/2005/Atom"
+            xmlns:media="http://search.yahoo.com/mrss/">
+        '''
+        for entry in entries:
+            xml = xml + entry.content
+        xml = xml + '</feed>'
+        # create etree xml doc
+        #f = StringIO(xml)
+        doc = etree.XML(xml)
+
+        # create transformer from xsl
+        xsl_file = './styles/bloglist.xsl'
+        xsl_root = etree.parse(xsl_file)
+        transformer = etree.XSLT(xsl_root)
+
+        result_tree = transformer(doc)
+
+        self.response.write(str(result_tree))
+

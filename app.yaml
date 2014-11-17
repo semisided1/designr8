@@ -4,10 +4,15 @@ runtime: python27
 api_version: 1
 threadsafe: true
 
-libraries: 
+libraries:
 - name: webapp2
+  version: latest
+- name: lxml
   version: latest
 
 handlers:
 - url: /.*
   script: designr8.application
+- url:/styles
+    static_dir:styles
+    application_readable:true
