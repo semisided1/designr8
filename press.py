@@ -16,17 +16,28 @@ class Press(webapp2.RequestHandler):
             <div><div class="label">title</div><textarea name="title" rows="1" cols="60"></textarea></div>
             <div><div class="label">summary</div><textarea name="summary" rows="1" cols="60"></textarea></div>
 
-            <div><div class="label">thumbnail url</div><textarea name="thumbnail" rows="1" cols="60"></textarea></div>
-            <div><div class="label">content</div><textarea name="content" rows="3" cols="60"></textarea></div>
+            <div><div class="label">thumbnail</div><textarea name="thumbnail" rows="5" cols="120"></textarea></div>
+            <div><div class="label">content</div><textarea name="content" rows="10" cols="120"></textarea></div>
             <div><div class="label">category</div>
-            <input type="radio" name="category" value="Welcome" checked>Welcome
-            <input type="radio" name="category" value="Services" >Services
-            <input type="radio" name="category" value="Profile" >Profile
-            <input type="radio" name="category" value="Food" >Food
-            <input type="radio" name="category" value="Tech" >Tech
-            <input type="radio" name="category" value="Art" >Art
 
 
+            <input type="radio" id="c1" name="category" value="Welcome" checked>
+            <label for="c1">Welcome</label>
+
+            <input type="radio" id="c2" name="category" value="Services" >
+            <label for="c2">Services</label>
+
+            <input type="radio" id="c3" name="category" value="Profile" >
+            <label for="c3">Profile</label>
+
+            <input type="radio" id="c4" name="category" value="Food" >
+            <label for="c4">Food</label>
+
+            <input type="radio" id="c5" name="category" value="Tech" >
+            <label for="c5">Tech</label>
+
+            <input type="radio" id="c6" name="category" value="Art" >
+            <label for="c6">Art</label>
 
             <div><input type="submit" value="Blog Post"></div>
             </form>
@@ -40,6 +51,7 @@ class Press(webapp2.RequestHandler):
         self.response.write(''' \
             <html><head>
             <title> Designr8.com Press </title>
+            <link rel="stylesheet" type="text/css" href="/styles/press.css" />
             </head>
             <body><h2>Designr8.com Press</h2>''')
 
@@ -50,12 +62,6 @@ class Press(webapp2.RequestHandler):
             ancestor= datastore.create_entry_key(catalogue_name)).order(-Entry.date)
 
         entries = catalogue_query.fetch()
-
-        for entry in entries:
-            self.response.write('<hr/><blockquote>%s</blockquote>' %
-                                cgi.escape(entry.content))
-
-        self.response.write('<hr/>')
 
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)

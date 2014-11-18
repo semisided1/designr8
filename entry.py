@@ -11,22 +11,21 @@ class Entry(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 
     def mytoXML(self, baseurl):
-        link = baseurl + '?%s' % urllib.urlencode({'article':self.title})
+        link = baseurl + '/article?%s' % urllib.urlencode({'title':self.title})
         feedid = link
 
         toret = '''
-
-        <entry>
-        <title>%s</title>
-        <link>%s</link>
-        <id>%s</id>
-        <summary type="html">%s</summary>
-        <category>%s</category>
-        <media:thumbnail>%s</media:thumbnail>
-        <updated>%s</updated>
-        <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">%s</div></content>
-        </entry>
-        '''
+<entry>
+<title>%s</title>
+<link>%s</link>
+<id>%s</id>
+<summary type="html">%s</summary>
+<category>%s</category>
+<media:thumbnail url="%s"></media:thumbnail>
+<updated>%s</updated>
+<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">%s</div></content>
+</entry>
+'''
         return toret % (self.title,link,feedid,self.summary,self.category,self.thumbnail,self.date, self.content)
 
 

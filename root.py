@@ -8,19 +8,6 @@ from lxml import etree
 
 class Root(webapp2.RequestHandler):
 
-    ROOT_PAGE = '''\
-        <html>
-        <head></head>
-        <title>Designr8.com</title>
-        <body>
-            <h1> Blank Page </h1>
-            <pre>
-                %s
-            </pre>
-        </body>
-        </html>
-    '''
-
     def get(self):
         # get all the entries
         catalogue_name = self.request.get('catalogue_name',

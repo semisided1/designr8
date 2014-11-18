@@ -1,16 +1,40 @@
 import webapp2
+import cgi
 
-BLANK_PAGE = '''\
-<html>
-<head>
-<title>blank</title>
-</head>
-<body>
-blank
-</body>
-</html>
-'''
+from entry import Entry
+import datastore
+
+from lxml import etree
 
 class Article(webapp2.RequestHandler):
+
     def get(self):
-        self.response.write(BLANK_PAGE)
+        # get all the entries
+        catalogue_name = self.request.get('catalogue_name',
+            datastore.DEFAULT_CATALOGUE_NAME)
+        catalogue_query = Entry.query(
+            ancestor=datastore.create_entry_key(catalogue_name)).order(-Entry.date)
+        entries = catalogue_query.fetch()
+
+        # wrap feed around the entries
+        xml = '''\
+        <feed xmlns="http://www.w3.org/2005/Atom"
+            xmlns:media="http://search.yahoo.com/mrss/">
+        '''
+        for entry in entries:
+            xml = xml + entry.mytoXML(self.request.scheme + '://' + self.request.host)
+        xml = xml + '</feed>'
+        # create etree xml doc
+        #f = StringIO(xml)
+        doc = etree.XML(xml)
+
+        # create transformer from xsl
+        xsl_file = './styles/blog.xsl'
+        xsl_root = etree.parse(xsl_file)
+        transformer = etree.XSLT(xsl_root)
+
+        the_title =  "\"" + self.request.get('title') + "\""
+        result_tree = transformer(doc,title=the_title)
+
+        self.response.write(str(result_tree))
+

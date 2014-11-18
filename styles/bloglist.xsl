@@ -10,17 +10,18 @@
 
 <xsl:output indent="yes" />
 
-<!--
+
 <xsl:include href="header.xsl" />
 <xsl:include href="footer.xsl" />
--->
+
 <xsl:template match="/">
-<!--
+
         <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
             <head>
-                <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT'
+            <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT'
                     rel='stylesheet' type='text/css' />
-                <link rel="stylesheet" type="text/css" href="bloglist.css" />
+
+                <link rel="stylesheet" type="text/css" href="/styles/bloglist.css" />
                 <link rel="alternate" type="application/atom+xml"
                 href="atom.xml" title="Atom Feed for Designr8.com" />
             </head>
@@ -34,8 +35,6 @@
 
             </body>
         </html>
--->
-         <xsl:apply-templates />
 
 </xsl:template>
 

@@ -1,0 +1,30 @@
+* {
+    line-height : 2em;
+    background-color: silver;
+}
+body {
+    padding-left: 3em;
+}
+.label {
+    padding-top : 1em;
+    color:green;
+    background-color: lightgrey;
+    font-size: large;
+}
+
+.label, textarea {
+    width : 800px;
+}
+
+input {
+    padding-top : 1em;
+    float : left;
+    clear : left;
+}
+
+label {
+    padding-top : .5em;
+    line-height : 1em;
+    float : left;
+    clear : right;
+}

@@ -1,0 +1,182 @@
+body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	/* This removes the border around the viewport in old versions of IE */
+	width: 100%;
+	background: white;
+	min-width: 600px;
+	/* Minimum width of layout - remove line if not required */
+	/* The min-width property does not work in old versions of Internet Explorer */
+	font-size: 100%;
+	font-family: 'Old Standard TT', serif;
+}
+div.atomentry {
+	float:left;
+	padding-top:1em;
+	padding-left:.5em;
+	width:15em;
+	height: 20em;
+	overflow: hidden;
+}
+div.atomentry:hover {
+	background: #FFA858;
+	text-decoration: none;
+}
+img.thumb {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.thumbdiv {
+	height: 10em;
+	display: block;
+	overflow: hidden;
+}
+div.atomupdated {
+	font-size:75%;
+}
+a {
+	text-decoration: none;
+}
+
+a:hover {
+}
+
+h1,h2,h3 {
+	margin: .8em 0 .2em 0;
+	padding: 0;
+	font-family: 'Old Standard TT', serif;
+}
+p {
+	margin: .4em 0 .8em 0;
+	padding: 0;
+}
+img {
+	margin: 10px 0 5px;
+}
+
+img.feature {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+ul {
+	list-style: none;
+	line-height: 2em;
+}
+.current {
+	color: red;
+}
+#header {
+	clear: both;
+	float: left;
+	width: 100%;
+}
+#header {
+	border-bottom: 1px solid #000;
+}
+#header p,#header h1,#header h2 {
+	padding: .4em 15px 0 15px;
+	margin: 0;
+}
+#header ul {
+	clear: left;
+	float: left;
+	width: 100%;
+	list-style: none;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+#header ul li {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+#header ul li a {
+	display: block;
+	float: left;
+	margin: 0 0 0 1px;
+	padding: 3px 10px;
+	text-align: center;
+	background: #eee;
+	color: #000;
+	text-decoration: none;
+	position: relative;
+	left: 15px;
+	line-height: 1.3em;
+}
+#header ul li a:hover {
+	background: #369;
+	color: #fff;
+}
+#header ul li a.active,#header ul li a.active:hover {
+	color: #fff;
+	background: #000;
+	font-weight: bold;
+}
+#header ul li a span {
+	display: block;
+}
+#layoutdims {
+	clear: both;
+	background: #eee;
+	border-top: 4px solid #000;
+	margin: 0;
+	padding: 6px 15px !important;
+	text-align: right;
+}
+.colmask {
+	position: relative;
+	/* This fixes the IE7 overflow hidden bug and stops the layout jumping out of place */
+	clear: both;
+	float: left;
+	width: 100%; /* width of whole page */
+	overflow: hidden; /* This chops off any overhanging divs */
+}
+.rightmenu {
+	background: white;
+	/*#d2d6ce; */
+}
+.rightmenu .colleft {
+	float: left;
+	width: 200%;
+	margin-left: -20em;
+	position: relative;
+	right: 100%;
+	background: white;
+}
+.rightmenu .col1wrap {
+	float: left;
+	width: 50%;
+	position: relative;
+	left: 50%;
+	padding-bottom: 1em;
+}
+.rightmenu .col1 {
+	margin: 0 1em 0 21em;
+	overflow: hidden;
+}
+.rightmenu .col2 {
+	float: right;
+	width: 10em;
+	position: relative;
+	left: 10em;
+}
+.rightmenu .col1  {
+	float: left;
+	padding-right: 1em;
+}
+#footer {
+	clear: both;
+	float: left;
+	width: 100%;
+	border-top: 1px solid #000;
+	padding-bottom: 3em;
+}
+#footer p {
+	padding: 10px;
+	margin: 0;
+}

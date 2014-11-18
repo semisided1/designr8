@@ -11,5 +11,9 @@ libraries:
   version: latest
 
 handlers:
+
+- url: /styles
+  static_dir: styles
+
 - url: /.*
   script: designr8.application

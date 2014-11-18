@@ -11,5 +11,5 @@ application = webapp2.WSGIApplication([
     ('/article', Article),
     ('/',Root),
     ('/directory',Directory),
-    ('/feed',Feed)
+    ('/atom.xml',Feed)
 ], debug=True)

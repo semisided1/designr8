@@ -18,13 +18,13 @@ class Feed(webapp2.RequestHandler):
         entries = catalogue_query.fetch()
 
         # wrap feed around the entries
-        xml = '''\
-        <feed xmlns="http://www.w3.org/2005/Atom"
-        xmlns:media="http://search.yahoo.com/mrss/">'''
+        xml = '''<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+xmlns:media="http://search.yahoo.com/mrss/">'''
         for entry in entries:
             xml = xml + entry.mytoXML(self.request.scheme + '://' + self.request.host)
         xml = xml + '''
-        </feed>'''
+</feed>'''
 
         # create etree xml doc
         #f = StringIO(xml)
