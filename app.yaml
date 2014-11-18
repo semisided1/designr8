@@ -13,6 +13,3 @@ libraries:
 handlers:
 - url: /.*
   script: designr8.application
-- url:/styles
-    static_dir:styles
-    application_readable:true

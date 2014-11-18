@@ -1,3 +1,4 @@
+# Feed.py
 import webapp2
 import cgi
 
@@ -6,20 +7,7 @@ import datastore
 
 from lxml import etree
 
-class Root(webapp2.RequestHandler):
-
-    ROOT_PAGE = '''\
-        <html>
-        <head></head>
-        <title>Designr8.com</title>
-        <body>
-            <h1> Blank Page </h1>
-            <pre>
-                %s
-            </pre>
-        </body>
-        </html>
-    '''
+class Feed(webapp2.RequestHandler):
 
     def get(self):
         # get all the entries
@@ -32,21 +20,16 @@ class Root(webapp2.RequestHandler):
         # wrap feed around the entries
         xml = '''\
         <feed xmlns="http://www.w3.org/2005/Atom"
-            xmlns:media="http://search.yahoo.com/mrss/">
-        '''
+        xmlns:media="http://search.yahoo.com/mrss/">'''
         for entry in entries:
             xml = xml + entry.mytoXML(self.request.scheme + '://' + self.request.host)
-        xml = xml + '</feed>'
+        xml = xml + '''
+        </feed>'''
+
         # create etree xml doc
         #f = StringIO(xml)
         doc = etree.XML(xml)
 
-        # create transformer from xsl
-        xsl_file = './styles/bloglist.xsl'
-        xsl_root = etree.parse(xsl_file)
-        transformer = etree.XSLT(xsl_root)
-
-        result_tree = transformer(doc)
-
-        self.response.write(str(result_tree))
+        self.response.headers['Content-Type'] = 'text/plain'
+        self.response.write(xml)
 

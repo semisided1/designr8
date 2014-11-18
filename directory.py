@@ -2,7 +2,7 @@ import webapp2
 import cgi
 
 class Directory(webapp2.RequestHandler):
-    directory =  [ '/press','/article','/','/directory' ]
+    directory =  [ '/press','/article','/','/directory','/feed' ]
     direntry = '''\
     <blockquote><a href="%s">%s</a></blockquote>
     '''
